@@ -1,0 +1,232 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://Scripts/PlayerCharacter.gd" type="Script" id=1]
+[ext_resource path="res://Assets/PlayerCharacter.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 40, 56 )
+
+[sub_resource type="Animation" id=16]
+resource_name = "Fall"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Jump"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 28, 29, 30, 31 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Run"
+length = 2.0
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15, 16, 17, 18, 19 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Turn"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 20, 21, 22, 23 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Walk"
+length = 2.0
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "Fall"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "Turn"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/Fall/node = SubResource( 36 )
+states/Fall/position = Vector2( 909.912, 166.289 )
+states/Idle/node = SubResource( 19 )
+states/Idle/position = Vector2( 117, 46 )
+states/Jump/node = SubResource( 29 )
+states/Jump/position = Vector2( 117, 294 )
+states/Run/node = SubResource( 20 )
+states/Run/position = Vector2( 560, 294 )
+states/Turn/node = SubResource( 41 )
+states/Turn/position = Vector2( 671.912, 166.289 )
+states/Walk/node = SubResource( 21 )
+states/Walk/position = Vector2( 560, 46 )
+transitions = [ "Idle", "Walk", SubResource( 22 ), "Walk", "Idle", SubResource( 23 ), "Idle", "Run", SubResource( 24 ), "Run", "Idle", SubResource( 25 ), "Run", "Walk", SubResource( 26 ), "Walk", "Run", SubResource( 27 ), "Idle", "Jump", SubResource( 30 ), "Jump", "Idle", SubResource( 31 ), "Walk", "Jump", SubResource( 32 ), "Jump", "Walk", SubResource( 33 ), "Jump", "Run", SubResource( 34 ), "Run", "Jump", SubResource( 35 ), "Walk", "Fall", SubResource( 37 ), "Fall", "Walk", SubResource( 38 ), "Run", "Fall", SubResource( 39 ), "Fall", "Run", SubResource( 40 ), "Walk", "Turn", SubResource( 42 ), "Run", "Turn", SubResource( 45 ), "Jump", "Fall", SubResource( 46 ) ]
+start_node = "Idle"
+graph_offset = Vector2( 57.6915, 1.28877 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
+[node name="PlayerCharacterKinematicBody" type="KinematicBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PlayerCharacterSprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+vframes = 36
+frame = 2
+
+[node name="PlayerCharacterCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+shape = SubResource( 28 )
+
+[node name="PlayerCharacterAnimator" type="AnimationPlayer" parent="."]
+anims/Fall = SubResource( 16 )
+anims/Idle = SubResource( 3 )
+anims/Jump = SubResource( 14 )
+anims/Run = SubResource( 8 )
+anims/Turn = SubResource( 11 )
+anims/Walk = SubResource( 5 )
+
+[node name="PlayerCharacterAnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 17 )
+anim_player = NodePath("../PlayerCharacterAnimator")
+active = true
+parameters/playback = SubResource( 18 )
+
+[node name="PlayerCharacterGroundedRayCast" type="RayCast2D" parent="."]
+position = Vector2( -40, 66 )
+enabled = true
+cast_to = Vector2( 80, 0 )
+collide_with_areas = true
+
+[node name="PlayerCharacterCamera" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.8, 0.8 )
