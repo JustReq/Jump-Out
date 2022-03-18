@@ -1,10 +1,45 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/PlayerCharacter.gd" type="Script" id=1]
 [ext_resource path="res://Assets/PlayerCharacter.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=28]
+[sub_resource type="RectangleShape2D" id=47]
 extents = Vector2( 40, 56 )
+
+[sub_resource type="Animation" id=58]
+resource_name = "Crouch"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 39 ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "Crouch_Init"
+length = 0.05
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 38 ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "Fall"
@@ -25,8 +60,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "Idle"
+length = 0.4
 loop = true
-step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerCharacterSprite:frame")
 tracks/0/interp = 1
@@ -34,7 +69,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -57,11 +92,10 @@ tracks/0/keys = {
 "values": [ 28, 29, 30, 31 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "Run"
-length = 2.0
-loop = true
-step = 0.25
+[sub_resource type="Animation" id=52]
+resource_name = "Land"
+length = 0.15
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerCharacterSprite:frame")
 tracks/0/interp = 1
@@ -69,15 +103,34 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
+"times": PoolRealArray( 0, 0.075 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 36, 37 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Run"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 12, 13, 14, 15, 16, 17, 18, 19 ]
 }
 
 [sub_resource type="Animation" id=11]
-resource_name = "Turn"
-length = 0.4
+resource_name = "Turn_Walk"
+length = 0.1
+loop = true
+step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerCharacterSprite:frame")
 tracks/0/interp = 1
@@ -85,17 +138,16 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 20, 21, 22, 23 ]
+"values": [ 21 ]
 }
 
 [sub_resource type="Animation" id=5]
 resource_name = "Walk"
-length = 2.0
+length = 0.8
 loop = true
-step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerCharacterSprite:frame")
 tracks/0/interp = 1
@@ -103,11 +155,17 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=59]
+animation = "Crouch"
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "Crouch_Init"
 
 [sub_resource type="AnimationNodeAnimation" id=36]
 animation = "Fall"
@@ -118,11 +176,14 @@ animation = "Idle"
 [sub_resource type="AnimationNodeAnimation" id=29]
 animation = "Jump"
 
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "Land"
+
 [sub_resource type="AnimationNodeAnimation" id=20]
 animation = "Run"
 
-[sub_resource type="AnimationNodeAnimation" id=41]
-animation = "Turn"
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "Turn_Walk"
 
 [sub_resource type="AnimationNodeAnimation" id=21]
 animation = "Walk"
@@ -141,54 +202,73 @@ animation = "Walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=37]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=66]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id=17]
+states/Crouch/node = SubResource( 59 )
+states/Crouch/position = Vector2( -57, 162.289 )
+states/Crouch_Init/node = SubResource( 64 )
+states/Crouch_Init/position = Vector2( -57, 46 )
 states/Fall/node = SubResource( 36 )
-states/Fall/position = Vector2( 909.912, 166.289 )
+states/Fall/position = Vector2( 909.912, 162.289 )
 states/Idle/node = SubResource( 19 )
 states/Idle/position = Vector2( 117, 46 )
 states/Jump/node = SubResource( 29 )
 states/Jump/position = Vector2( 117, 294 )
+states/Land/node = SubResource( 53 )
+states/Land/position = Vector2( 909.912, 294 )
 states/Run/node = SubResource( 20 )
 states/Run/position = Vector2( 560, 294 )
-states/Turn/node = SubResource( 41 )
-states/Turn/position = Vector2( 671.912, 166.289 )
+states/Turn_Walk/node = SubResource( 49 )
+states/Turn_Walk/position = Vector2( 909.912, 46 )
 states/Walk/node = SubResource( 21 )
 states/Walk/position = Vector2( 560, 46 )
-transitions = [ "Idle", "Walk", SubResource( 22 ), "Walk", "Idle", SubResource( 23 ), "Idle", "Run", SubResource( 24 ), "Run", "Idle", SubResource( 25 ), "Run", "Walk", SubResource( 26 ), "Walk", "Run", SubResource( 27 ), "Idle", "Jump", SubResource( 30 ), "Jump", "Idle", SubResource( 31 ), "Walk", "Jump", SubResource( 32 ), "Jump", "Walk", SubResource( 33 ), "Jump", "Run", SubResource( 34 ), "Run", "Jump", SubResource( 35 ), "Walk", "Fall", SubResource( 37 ), "Fall", "Walk", SubResource( 38 ), "Run", "Fall", SubResource( 39 ), "Fall", "Run", SubResource( 40 ), "Walk", "Turn", SubResource( 42 ), "Run", "Turn", SubResource( 45 ), "Jump", "Fall", SubResource( 46 ) ]
+transitions = [ "Idle", "Walk", SubResource( 22 ), "Walk", "Idle", SubResource( 23 ), "Idle", "Run", SubResource( 24 ), "Run", "Idle", SubResource( 25 ), "Run", "Walk", SubResource( 26 ), "Walk", "Run", SubResource( 27 ), "Idle", "Jump", SubResource( 30 ), "Walk", "Jump", SubResource( 32 ), "Run", "Jump", SubResource( 35 ), "Walk", "Fall", SubResource( 37 ), "Run", "Fall", SubResource( 39 ), "Jump", "Fall", SubResource( 48 ), "Walk", "Turn_Walk", SubResource( 50 ), "Turn_Walk", "Walk", SubResource( 51 ), "Fall", "Land", SubResource( 54 ), "Land", "Run", SubResource( 55 ), "Land", "Walk", SubResource( 56 ), "Land", "Idle", SubResource( 57 ), "Idle", "Crouch_Init", SubResource( 65 ), "Crouch_Init", "Crouch", SubResource( 66 ), "Crouch", "Crouch_Init", SubResource( 67 ), "Crouch_Init", "Idle", SubResource( 68 ), "Crouch_Init", "Jump", SubResource( 69 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 57.6915, 1.28877 )
+graph_offset = Vector2( -341.194, -133.601 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
@@ -200,19 +280,22 @@ __meta__ = {
 
 [node name="PlayerCharacterSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-vframes = 36
+vframes = 40
 frame = 2
 
 [node name="PlayerCharacterCollider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
-shape = SubResource( 28 )
+shape = SubResource( 47 )
 
 [node name="PlayerCharacterAnimator" type="AnimationPlayer" parent="."]
+anims/Crouch = SubResource( 58 )
+anims/Crouch_Init = SubResource( 63 )
 anims/Fall = SubResource( 16 )
 anims/Idle = SubResource( 3 )
 anims/Jump = SubResource( 14 )
+anims/Land = SubResource( 52 )
 anims/Run = SubResource( 8 )
-anims/Turn = SubResource( 11 )
+anims/Turn_Walk = SubResource( 11 )
 anims/Walk = SubResource( 5 )
 
 [node name="PlayerCharacterAnimationTree" type="AnimationTree" parent="."]
@@ -230,3 +313,21 @@ collide_with_areas = true
 [node name="PlayerCharacterCamera" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.8, 0.8 )
+
+[node name="PlayerCharacterInfoLabel" type="Label" parent="."]
+margin_left = -392.0
+margin_top = -272.0
+margin_right = -176.0
+margin_bottom = -224.0
+
+[node name="PlayerCharacterMovesetLabel" type="Label" parent="."]
+margin_left = -496.0
+margin_top = -272.0
+margin_right = -280.0
+margin_bottom = -190.0
+text = "Left - A
+Crouch - S
+Right - D
+Jump - Space
+Run - Shift
+Reset - R"
