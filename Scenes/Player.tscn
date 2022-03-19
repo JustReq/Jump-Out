@@ -3,15 +3,16 @@
 [ext_resource path="res://Scripts/PlayerCharacter.gd" type="Script" id=1]
 [ext_resource path="res://Assets/PlayerCharacter.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=47]
-extents = Vector2( 40, 56 )
+[sub_resource type="CapsuleShape2D" id=70]
+radius = 24.0
+height = 64.0
 
 [sub_resource type="Animation" id=58]
 resource_name = "Crouch"
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -29,7 +30,7 @@ length = 0.05
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -46,7 +47,7 @@ resource_name = "Fall"
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -63,7 +64,7 @@ resource_name = "Idle"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -80,7 +81,7 @@ resource_name = "Jump"
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -97,7 +98,7 @@ resource_name = "Land"
 length = 0.15
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -114,7 +115,7 @@ resource_name = "Run"
 length = 0.8
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -132,7 +133,7 @@ length = 0.1
 loop = true
 step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -149,7 +150,7 @@ resource_name = "Walk"
 length = 0.8
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerCharacterSprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -272,22 +273,33 @@ graph_offset = Vector2( -341.194, -133.601 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
-[node name="PlayerCharacterKinematicBody" type="KinematicBody2D"]
+[node name="PlayerCharacter" type="KinematicBody2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PlayerCharacterSprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 40
-frame = 2
 
-[node name="PlayerCharacterCollider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
-shape = SubResource( 47 )
+shape = SubResource( 70 )
 
-[node name="PlayerCharacterAnimator" type="AnimationPlayer" parent="."]
+[node name="GroundedRayCast" type="RayCast2D" parent="."]
+position = Vector2( -24, 66 )
+enabled = true
+cast_to = Vector2( 40, 0 )
+collide_with_areas = true
+
+[node name="GrabRayCast" type="RayCast2D" parent="."]
+position = Vector2( -40, 0 )
+enabled = true
+cast_to = Vector2( 72, 0 )
+collide_with_areas = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Crouch = SubResource( 58 )
 anims/Crouch_Init = SubResource( 63 )
 anims/Fall = SubResource( 16 )
@@ -298,33 +310,26 @@ anims/Run = SubResource( 8 )
 anims/Turn_Walk = SubResource( 11 )
 anims/Walk = SubResource( 5 )
 
-[node name="PlayerCharacterAnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 17 )
-anim_player = NodePath("../PlayerCharacterAnimator")
+anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 18 )
 
-[node name="PlayerCharacterGroundedRayCast" type="RayCast2D" parent="."]
-position = Vector2( -40, 66 )
-enabled = true
-cast_to = Vector2( 80, 0 )
-collide_with_areas = true
-
-[node name="PlayerCharacterCamera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.8, 0.8 )
 
-[node name="PlayerCharacterInfoLabel" type="Label" parent="."]
-margin_left = -392.0
-margin_top = -272.0
-margin_right = -176.0
-margin_bottom = -224.0
+[node name="InfoLabel" type="Label" parent="."]
+margin_left = -536.0
+margin_top = -352.0
+margin_right = -320.0
+margin_bottom = -304.0
 
-[node name="PlayerCharacterMovesetLabel" type="Label" parent="."]
-margin_left = -496.0
-margin_top = -272.0
-margin_right = -280.0
-margin_bottom = -190.0
+[node name="MovesetLabel" type="Label" parent="."]
+margin_left = -632.0
+margin_top = -352.0
+margin_right = -416.0
+margin_bottom = -253.0
 text = "Left - A
 Crouch - S
 Right - D
