@@ -12,12 +12,12 @@ var inputVector
 var acceleration
 var friction = 2000
 var terminalSpeed = 720
-var gravity = 1500
+var gravity = 2000
 var jumpSpeed = 800
 var snapLength
-var wallGrabTimer = 60
 var directionFacing
 var wallDirection
+var wallClingTimer = 30
 
 var isGrounded
 var isJumping
@@ -149,11 +149,13 @@ func movement_GravityAndJump(var deltaTime):
 
 func movement_WallSlideAndWallJump():
 	if isGrounded:
-		wallGrabTimer = 60
+		wallClingTimer = 30
 	
-	if isGrabbingWall && !Input.is_action_pressed("jump") && directionFacing == wallDirection:
-		velocity.y = 0
-		wallGrabTimer -= 1
-	
-	if (wallGrabTimer <= 0 && isGrabbingWall) || Input.is_action_pressed("crouch"):
-		velocity.y = 200
+	if isGrabbingWall && directionFacing == wallDirection:
+		wallClingTimer -= 1
+		
+		if !Input.is_action_pressed("jump"):
+			velocity.y = 0
+		
+		if Input.is_action_pressed("crouch") || wallClingTimer <= 0:
+			velocity.y = 200

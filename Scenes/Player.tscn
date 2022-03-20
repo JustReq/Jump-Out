@@ -282,6 +282,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 40
+frame = 2
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
